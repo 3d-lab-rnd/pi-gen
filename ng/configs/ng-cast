@@ -1,0 +1,107 @@
+# pi-gen configuration for ng-cast (arm64 branch)
+# ================================================
+
+# --- Image Naming ---
+# Name of the output image (default: raspios-trixie-arm64)
+IMG_NAME="ng-cast"
+
+# Release name shown in /etc/issue.txt (default: Raspberry Pi reference)
+PI_GEN_RELEASE="ng-cast"
+
+# Debian release to build against (default: trixie)
+# Use matching branch: arm64 for 64-bit, master for 32-bit
+RELEASE="trixie"
+
+# --- Build Directories ---
+# Working directory for build stages (default: $BASE_DIR/work)
+# Use fast storage; requires tens of GBs. Must be Linux filesystem, not NTFS.
+WORK_DIR="${BASE_DIR}/ng/work/${IMG_NAME}"
+
+# Output directory for final images (default: $BASE_DIR/deploy)
+DEPLOY_DIR="${BASE_DIR}/ng/deploy"
+
+# --- Output Compression ---
+# Compression format: none, zip, gz, xz (default: zip)
+DEPLOY_COMPRESSION="xz"
+
+# Compression level 0-9: 0=fast/none, 9=best/slow (default: 6)
+COMPRESSION_LEVEL="6"
+
+# --- APT Configuration ---
+# APT proxy for faster builds, not included in final image (default: unset)
+#APT_PROXY="http://apt-cache:3142"
+
+# Temporary apt repo for pre-release packages (default: unset)
+# Format: one-line-style, "RELEASE" replaced with $RELEASE
+#TEMP_REPO="deb http://example.com/repo RELEASE main"
+
+# --- Locale & Keyboard ---
+# System locale (default: en_GB.UTF-8)
+LOCALE_DEFAULT="en_US.UTF-8"
+
+# Keyboard keymap (default: gb)
+KEYBOARD_KEYMAP="us"
+
+# Keyboard layout name (default: English (UK))
+KEYBOARD_LAYOUT="English (US)"
+
+# Timezone (default: Europe/London)
+TIMEZONE_DEFAULT="UTC"
+
+# --- Network & Hostname ---
+# System hostname (default: raspberrypi)
+TARGET_HOSTNAME="ng-cast"
+
+# WLAN country code, 2-letter ISO 3166 (default: unset)
+# Required to enable WiFi
+WPA_COUNTRY="US"
+
+# --- User Configuration ---
+# First user name (default: pi)
+# Renamed on first boot unless DISABLE_FIRST_BOOT_USER_RENAME=1
+FIRST_USER_NAME="ng"
+
+# First user password (default: unset = account locked)
+# If unset with pi user, setup wizard runs on first boot
+FIRST_USER_PASS="algorytm"
+
+# Keep first user name, skip rename on boot (default: 0)
+# Requires FIRST_USER_PASS to be set. Security risk if enabled.
+DISABLE_FIRST_BOOT_USER_RENAME="1"
+
+# --- SSH Configuration ---
+# Enable SSH server (default: 0)
+# Security risk with weak passwords
+ENABLE_SSH="1"
+
+# SSH authorized_keys content for first user (default: unset)
+PUBKEY_SSH_FIRST_USER="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGd1kzIVaIAH3wQKPB9t3DTV8sgwRykonm2YWnxPN6yO kszonek"
+
+# Disable SSH password auth, require pubkey (default: 0)
+PUBKEY_ONLY_SSH="0"
+
+# --- Build Options ---
+# Enable QEMU mode for emulated env (default: 0)
+# Adds "-qemu" suffix to image name
+USE_QEMU="0"
+
+# Custom stages list instead of stage* order (default: stage*)
+# Includes base stages 0-2 + ng custom stages
+STAGE_LIST="stage0 stage1 stage2 ng/stages/stage3-begin ng/stages/stage4-docker ng/stages/stage4-chromium ng/stages/stage4-wifi ng/stages/stage5-cast ng/stages/stage6-finalize"
+
+# Custom export scripts directory (default: $BASE_DIR/export-image)
+#EXPORT_CONFIG_DIR="${BASE_DIR}/export-image"
+
+# --- Cloud-init ---
+# Enable cloud-init and netplan (default: 1)
+# Config files in bootfs or stage2/04-cloud-init/files/
+ENABLE_CLOUD_INIT="0"
+
+# --- NG Custom Keys ---
+# NetBird setup key for device registration
+NG_NETBIRD_SETUP_KEY="6DE32F00-7C41-4B60-BBED-25C0A43D4B70"
+
+# --- Advanced ---
+# Preserve filesystem capabilities feature (default: unset)
+# Only enable if you understand NFS compatibility issues
+#SETFCAP="0"

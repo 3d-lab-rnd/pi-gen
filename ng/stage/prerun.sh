@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# ng-docker stage prerun
+# Active NG stage prerun
 
 if [ ! -d "${ROOTFS_DIR}" ]; then
     copy_previous

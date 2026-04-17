@@ -1,12 +1,12 @@
-# pi-gen configuration for ng-cast (arm64 branch)
-# ================================================
+# pi-gen configuration for ng-ato-panel (arm64 branch)
+# ====================================================
 
 # --- Image Naming ---
 # Name of the output image (default: raspios-trixie-arm64)
-IMG_NAME="ng-cast"
+IMG_NAME="ng-ato-panel"
 
 # Release name shown in /etc/issue.txt (default: Raspberry Pi reference)
-PI_GEN_RELEASE="ng-cast"
+PI_GEN_RELEASE="ng-ato-panel"
 
 # Debian release to build against (default: trixie)
 # Use matching branch: arm64 for 64-bit, master for 32-bit
@@ -50,7 +50,7 @@ TIMEZONE_DEFAULT="UTC"
 
 # --- Network & Hostname ---
 # System hostname (default: raspberrypi)
-TARGET_HOSTNAME="ng-cast"
+TARGET_HOSTNAME="ng-ato-panel"
 
 # WLAN country code, 2-letter ISO 3166 (default: unset)
 # Required to enable WiFi
@@ -108,23 +108,24 @@ ENABLE_CLOUD_INIT="0"
 
 # NetBird client setup key for automatic device registration
 # Leave empty to skip NetBird registration
-NG_NETBIRD_SETUP_KEY="6DE32F00-7C41-4B60-BBED-25C0A43D4B70"
+NG_NETBIRD_SETUP_KEY=""
 
 # Wi-Fi configuration (0=disabled, 1=enabled)
-NG_ENABLE_WIFI="1"
+NG_ENABLE_WIFI="0"
 
 # Ethernet configuration (combinations allowed)
-# NG_ENABLE_ETH_DHCP: Use DHCP on eth0 (overrides manual settings if both enabled)
+# NG_ENABLE_ETH_DHCP: Use DHCP on eth0
 # NG_ENABLE_ETH_MANUAL: Use static IP on eth0
-NG_ENABLE_ETH_DHCP="1"
-NG_ENABLE_ETH_MANUAL="0"
+NG_ENABLE_ETH_DHCP="0"
+NG_ENABLE_ETH_MANUAL="1"
 
-# Static Ethernet settings (required only if NG_ENABLE_ETH_MANUAL="1")
+# Static Ethernet settings (required when NG_ENABLE_ETH_MANUAL="1")
 # NG_ETH_IP must include CIDR suffix, e.g. 10.57.5.71/24
-NG_ETH_IP=""
-NG_ETH_GATEWAY=""
-NG_ETH_DNS=""
+NG_ETH_IP="10.57.5.71/24"
+NG_ETH_GATEWAY="10.57.5.10"
+NG_ETH_DNS="8.8.8.8"
 
 # Wi-Fi access points (SSID and password pairs)
 # Format: space-separated list of "SSID:PASSWORD" entries
-NG_WIFI_APS="3DLab:3dlab%6734_farb kszonogrod:algorytm"
+# Not used when NG_ENABLE_WIFI="0"
+NG_WIFI_APS=""
